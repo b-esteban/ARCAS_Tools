@@ -7,7 +7,8 @@ import { createContext, useEffect, useState } from "react";
 const keycloakConfig: KeycloakConfig = {
   realm: "Testrealm",
   clientId: "webswing-webapp",
-  url: "http://localhost:8180/",
+  //url: "https://192.168.64.2/auth"
+  url: "https://arcas.chs.harvard.edu/auth"
 };
 
 /**
@@ -147,7 +148,9 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
    * Initiate the logout
    */
   const logout = () => {
-    keycloak.logout({ redirectUri: 'http://localhost:3000/' });
+    keycloak.logout({ redirectUri: 'https://arcas.chs.harvard.edu/webapp' });
+   // keycloak.logout({ redirectUri: 'https://192.168.64.2/webapp' });
+
   };
 
   /**

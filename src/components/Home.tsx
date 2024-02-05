@@ -48,9 +48,12 @@ const Home  = () =>  {
   function handleClickBasicLS (appname: string) {
       setOpenBasicLS(true);
       const appsConfig: { [key: string]: string } = {
-        'app1': 'http://localhost:8080/flatlaf',
-        'app2': 'http://localhost:8080/netbeans',
-        'app3': 'http://localhost:8080/igv'
+        'app1': 'https://arcas.chs.harvard.edu/arboreal',
+        'app2': 'https://arcas.chs.harvard.edu/svm',
+        'app3': 'https://arcas.chs.harvard.edu/corpuscrawler'
+        //'app1': 'https://192.168.64.2/arboreal',
+        //'app2': 'https://192.168.64.2/svm',
+        //'app3': 'https://192.168.64.2/corpuscrawler'
       };
       
       //window.dispatchEvent(new Event('initialiseDesigner'))
