@@ -1,0 +1,3 @@
+WEBSWING_HOME="/opt/webswing"
+WEBSWING_OPTS="-h 0.0.0.0 -j $WEBSWING_HOME/jetty.properties -serveradmin -pfa $WEBSWING_HOME/admin/webswing-admin.properties -adminctx /admin -aw admin/webswing-admin-server.war -c /opt/app/config/webswing.config"
+WEBSWING_JAVA_OPTS="-Xmx256M -Djava.net.preferIPv4Stack=true -Dwebswing.admin.url=http://127.0.0.1:8080/admin"

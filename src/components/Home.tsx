@@ -21,7 +21,7 @@ const Home  = () =>  {
   const authContext = useContext(AuthContext);
 
   useEffect(() =>{
-          const onLoad = window.dispatchEvent;
+          //const onLoad = window.dispatchEvent;
           const webswingFinction = window.webFunction;
           webswingFinction(window, document);
          //onLoad(new Event('initialiseDesigner') );
@@ -45,18 +45,22 @@ const Home  = () =>  {
   const [openBasicLS, setOpenBasicLS] = useState(false);
 
   //const handleClickBasicLS = () => {
-  function handleClickBasicLS (appname: string) {
+  function handleClickBasicLS (appname: string,e: MouseEvent) {
+      console.log('about to stop page from reload because of click', appname, e)
+
+      e.preventDefault(); // prevent reload
+      e.stopPropagation();
+      //e.nativeEvent.stopImmediatePropagation();
+      console.log('stopped page from reload because of click', appname, e)
       setOpenBasicLS(true);
       const appsConfig: { [key: string]: string } = {
-        'app1': 'https://arcas.chs.harvard.edu/arboreal',
-        'app2': 'https://arcas.chs.harvard.edu/svm',
-        'app3': 'https://arcas.chs.harvard.edu/corpuscrawler'
-        //'app1': 'https://192.168.64.2/arboreal',
-        //'app2': 'https://192.168.64.2/svm',
-        //'app3': 'https://192.168.64.2/corpuscrawler'
+        'app1': 'http://localhost:8080/netbeans',
+        'app2': 'http://localhost:8080/netbeans',
+        'app3': 'http://localhost:8080/netbeans'
       };
       
       //window.dispatchEvent(new Event('initialiseDesigner'))
+      console.log('dispatching event', appname)
       window.dispatchEvent(new CustomEvent('initialiseApp', {detail: appsConfig[appname]}))
       
   };
@@ -72,43 +76,27 @@ const Home  = () =>  {
 
   return (
       <div className={classes.radioAssembly}>
-          <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={2}
-              className= 'MyGrid'
-          >
-              <Grid item xs={12} sm={6} md={3} >
-                  <a >
-                      <Button onClick={() => handleClickBasicLS('app1')} className='MyButton1' variant="outlined" color="secondary">
-                          Load app1
+         
+                  <a type="button">
+                      <Button type="button" onClick={(e: any) => handleClickBasicLS('app1', e)} className='MyButton1' variant="outlined" color="secondary">
+                          Load app1.1
                       </Button>
                   </a>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3} >
-                  <a >
-                      <Button onClick={() => handleClickBasicLS('app2')} className='MyButton2' variant="outlined" color="secondary">
-                          Load app2
+                  <a type="button">
+                      <Button type="button" onClick={(e: any) => handleClickBasicLS('app2',e)} className='MyButton2' variant="outlined" color="secondary">
+                          Load app2.1
                       </Button>
                   </a>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3} >
-                  <a >
-                      <Button onClick={() => handleClickBasicLS('app3')} className='MyButton3' variant="outlined" color="secondary">
-                          Load app3
+                  <a type="button">
+                      <Button type="button" onClick={(e: any) => handleClickBasicLS('app3',e)} className='MyButton3' variant="outlined" color="secondary">
+                          Load app3.1
                       </Button>
                   </a>
-              </Grid>
-
-
-          </Grid>
-        
+            
           {/* Show different content based on the roles the user has assigned. */}
           {authContext.hasRole("user") && <p>You are a user</p>}
           {authContext.hasRole("admin") && <p>You are a admin</p>}
-          <button
+          <button type="button" 
             className="text-white bg-red-400 border-0 py-2 px-8 focus:outline-none hover:bg-red-400 rounded text-lg mt-10"
             onClick={authContext.logout}
           >
